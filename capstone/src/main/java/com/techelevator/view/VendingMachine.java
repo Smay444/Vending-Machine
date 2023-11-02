@@ -6,20 +6,22 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import static java.awt.SystemColor.menu;
 
 public class VendingMachine {
 
-    private final int MAX_INVENTORY = 5;
+    private int quantity = 5;
 
-    private static final String INTRO = "Welcome to the Vending Machine?";
-    private static final String FEED_MONEY = "Please enter your money now!";
-    private static final String SELECT_PRODUCT = "Which product do ya want?";
-    private static final String FINISH_TRANSACTION = "Thank you, Come Again!";
-    private static final String[] OPTIONS = {FEED_MONEY, SELECT_PRODUCT, FINISH_TRANSACTION};
+//    private static final String FEED_MONEY = "Please enter your money now!";
+//    private static final String SELECT_PRODUCT = "Which product do ya want?";
+//    private static final String FINISH_TRANSACTION = "Thank you, Come Again!";
+//    private static final String[] OPTIONS = {FEED_MONEY, SELECT_PRODUCT, FINISH_TRANSACTION};
 
-    private Map<String, Product> productList = new HashMap<>();
+    //Map<String, String> treeMap = new TreeMap<String, String>(unsortMap);
+    //        printMap(treeMap);
+    private Map<String, Product> productList = new TreeMap<String, Product>();
 
     public void loadItems() {
 
@@ -42,7 +44,9 @@ public class VendingMachine {
                 String type = linePart[3];
 
                 //constructor or setter and then add product to map
-                Product product = new Product();
+                Product product = new Product(slot, name, price, type);
+
+                productList.put(slot, product);
 
 //                System.out.println(line);
 //                System.out.println(name);
@@ -55,31 +59,37 @@ public class VendingMachine {
         } catch (Exception ex) {
             System.out.println("Figure this out later");
         }
+    }
 
-        public void openVendingOptions(Customer customer) {
-            //displaying whats available to them
-            while (true){
+    public void openVendingOptions(Customer customer) {
+        //displaying what's available to them
+
+        for(Map.Entry<String, Product> newMap: productList.entrySet()) {
+
+            Product product = newMap.getValue();
+
+            //map.put("apple", 5);
+            //        map.put("banana", 3);
+            //        map.put("cherry", 8);map.put("apple", 5);
+            //        map.put("banana", 3);
+            //        map.put("cherry", 8);v
 
 
-                String selectedOptions = VendingMachineCLI(OPTIONS);
-
-                //ALLOW THE USER TO PUT MONEY IN
-                //STORE THAT MONEY
-                //PICK AN ITEM
-                //TOTAL THE COST
-                //GIVE CHANGE
-                //FINISH TRANSACTION
-                //STORE TRANSACTION INFO SOMEWHERE
-
-
-            }
-
-            //display options???
-            //loop to start purchasing items
+            System.out.println(product.getSlot() + " | " + product.getName() + " | " + product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: " + quantity);
+//            productList.get("A2");
 
         }
 
+            //ALLOW THE USER TO PUT MONEY IN
+            //STORE THAT MONEY
+            //PICK AN ITEM
+            //TOTAL THE COST
+            //GIVE CHANGE
+            //FINISH TRANSACTION
+            //STORE TRANSACTION INFO SOMEWHERE
 
+        //display options???
+        //loop to start purchasing items
 
     }
 
