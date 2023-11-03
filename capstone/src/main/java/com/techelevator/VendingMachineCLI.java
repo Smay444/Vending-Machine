@@ -7,7 +7,7 @@ import com.techelevator.view.VendingMachine;
 public class VendingMachineCLI {
 
 	private VendingMachine vendingMachine = new VendingMachine();
-	private Purchase purchase = new Purchase();
+	private Purchase purchase = new Purchase(vendingMachine);
 
 
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";

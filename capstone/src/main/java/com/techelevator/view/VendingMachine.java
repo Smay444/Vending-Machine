@@ -14,6 +14,16 @@ public class VendingMachine {
 
     private int quantity = 5;
 
+    private double money = 0;
+
+    public double getMoney(){
+        return money;
+    }
+
+    public void setMoney(double money){
+        this.money = money;
+    }
+
 //    private static final String FEED_MONEY = "Please enter your money now!";
 //    private static final String SELECT_PRODUCT = "Which product do ya want?";
 //    private static final String FINISH_TRANSACTION = "Thank you, Come Again!";
@@ -22,6 +32,10 @@ public class VendingMachine {
     //Map<String, String> treeMap = new TreeMap<String, String>(unsortMap);
     //        printMap(treeMap);
     private Map<String, Product> productList = new TreeMap<String, Product>();
+
+    public Map<String, Product> getProductList(){
+        return productList;
+    }
 
     public void loadItems() {
 
@@ -48,13 +62,6 @@ public class VendingMachine {
 
                 productList.put(slot, product);
 
-//                System.out.println(line);
-//                System.out.println(name);
-//                System.out.println(price);
-//                System.out.println(type);
-
-//                System.out.println(linePart);
-
             }
         } catch (Exception ex) {
             System.out.println("Figure this out later");
@@ -74,9 +81,13 @@ public class VendingMachine {
             //        map.put("banana", 3);
             //        map.put("cherry", 8);v
 
-
-            System.out.println(product.getSlot() + " | " + product.getName() + " | " + product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: " + quantity);
-//            productList.get("A2");
+            if(quantity < 1){
+                System.out.println(product.getSlot() + " | " + product.getName() + " | " +
+                        product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: SOLD OUT");
+            } else {
+                System.out.println(product.getSlot() + " | " + product.getName() + " | " +
+                        product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: " + quantity);
+            }
 
         }
 
@@ -90,6 +101,17 @@ public class VendingMachine {
 
         //display options???
         //loop to start purchasing items
+
+    }
+
+    public void purchase(String slot){
+        Product product = productList.get(slot);
+
+        // what if we are already sold out
+        //what if user doesn't have enough money
+
+        product.setQuantity(product.getQuantity() - 1);
+        money -= product.getPrice();
 
     }
 
