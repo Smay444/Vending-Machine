@@ -22,14 +22,15 @@ public class Purchase {
     }
 
     public void openPurchaseOptions(Customer customer) {
-        vendingMachine.loadItems();
+        //vendingMachine.loadItems();
         Scanner scanner = new Scanner(System.in);
+
         //can we access our map from our vendingMachine class?
         try  {
             while (true) {
                 //create a variable that lets us display array options.
                 //System.out.println(OPTIONS);
-                System.out.println("Current Money Provided: $ " + moneyIn);
+                //System.out.println("Current Money Provided: $ " + moneyIn);
                 Menu menu = new Menu(System.in, System.out);
                 String choice = (String) menu.getChoiceFromOptions(OPTIONS);
 
@@ -44,14 +45,13 @@ public class Purchase {
                     String moneyInStr = scanner.nextLine();
                     Double moneyDbl = Double.parseDouble(moneyInStr);
 
-                    vendingMachine.setMoney(moneyDbl);
-                    //Double moneyInMachine = moneyDbl + moneyDbl;
-                    System.out.println("Current Money Provided: $ " + (moneyDbl));
+                    vendingMachine.setMoney(moneyDbl + vendingMachine.getMoney());
 
-                   // vendingMachine.getMoney();
-                        //need to add logic that keeps tally of how much money we've entered.
+                    System.out.println("Current Money Provided: $ " + (vendingMachine.getMoney()));
 
-                    System.out.println((String) menu.getChoiceFromOptions(OPTIONS));
+
+
+                    //System.out.println((String) menu.getChoiceFromOptions(OPTIONS));
 
                 } else if (choice.equals(SELECT_PRODUCT)) {
                     //will need logic to update quantity as items are removed
@@ -69,11 +69,17 @@ public class Purchase {
                     //subtract quantity from inventory
                     //if product doesn't exist
                     //inform customer and return them to purchase menu
+                    System.out.println("Current Money Provided: $ " + (vendingMachine.getMoney()));
 
-                    System.out.println((String) menu.getChoiceFromOptions(OPTIONS));
+
+
                 } else if (choice.equals(FINISH_TRANSACTION)){
+
+                    vendingMachine.getChange();
+
                     break;
                 }
+
                 //System.out.println(choice);
             }
 
@@ -82,4 +88,9 @@ public class Purchase {
         }
     }
     //this is for math logic
+    public void getChange(Double price){
+
+
+
+    }
 }

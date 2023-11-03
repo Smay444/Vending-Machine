@@ -15,6 +15,7 @@ public class VendingMachine {
     private int quantity = 5;
 
     private double balance = 0;
+    double change = 0;
 
     public double getMoney() {
         return balance;
@@ -22,6 +23,13 @@ public class VendingMachine {
 
     public void setMoney(double money) {
         this.balance = money;
+    }
+
+    public double getChange(){
+        return change;
+    }
+    public void setChange (double change){
+        this.change = change;
     }
 
 //    private static final String FEED_MONEY = "Please enter your money now!";
@@ -75,12 +83,12 @@ public class VendingMachine {
 
             Product product = newMap.getValue();
 
-            if (quantity < 1) {
+            if (product.getQuantity() < 1) {
                 System.out.println(product.getSlot() + " | " + product.getName() + " | " +
                         product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: SOLD OUT");
             } else {
                 System.out.println(product.getSlot() + " | " + product.getName() + " | " +
-                        product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: " + quantity);
+                        product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: " + product.getQuantity());
             }
 
         }
@@ -100,7 +108,6 @@ public class VendingMachine {
 
     public void purchase(String slot) {
 
-
         if (!productList.containsKey(slot)) { //if the slot selection does not exist in the map then
             System.out.println("Product not available. Please select a different option.");
         } else {
@@ -116,20 +123,24 @@ public class VendingMachine {
 
             } else if (product.getType().equals("Chip")) {
                 System.out.println("Crunch Crunch, Yum!");
+                product.setQuantity(product.getQuantity() - 1);
             } else if (product.getType().equals("Candy")) {
                 System.out.println("Munch Munch, Yum!");
+                product.setQuantity(product.getQuantity() - 1);
             } else if (product.getType().equals("Drink")) {
                 System.out.println("Glug Glug, Yum!");
+                product.setQuantity(product.getQuantity() - 1);
             } else if (product.getType().equals("Gum")) {
                 System.out.println("Chew Chew, Yum!");
+                product.setQuantity(product.getQuantity() - 1);
             }
 
             //what if user doesn't have enough money
 
-            product.setQuantity(product.getQuantity() - 1);
+            //product.setQuantity(product.getQuantity() - 1);
 
             balance -= product.getPrice();
-
+            //System.out.println(balance);
 
         }
 //          how to get feed money to acknowledge purchase method
@@ -137,6 +148,21 @@ public class VendingMachine {
 
         //print out remaining balance in vending machine
     }
+    public double getChange(Double price){
+
+        //if product cost < amt entered
+        Product product = productList.get(price);
+        VendingMachine vendingMachine = new VendingMachine();
+
+        if (product.getPrice() < vendingMachine.getMoney()){
+            change = vendingMachine.getMoney() - product.getPrice();
+
+        }
+        System.out.println("Your change is " + change);
+        return change;
+
+    }
+
 
 //    public static double findBalance(double){
 //        //moneyDbl - How to get this value to pass through this method?
