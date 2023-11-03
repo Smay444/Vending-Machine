@@ -14,14 +14,14 @@ public class VendingMachine {
 
     private int quantity = 5;
 
-    private double money = 0;
+    private double balance = 0;
 
     public double getMoney(){
-        return money;
+        return balance;
     }
 
     public void setMoney(double money){
-        this.money = money;
+        this.balance = money;
     }
 
 //    private static final String FEED_MONEY = "Please enter your money now!";
@@ -71,7 +71,7 @@ public class VendingMachine {
     public void openVendingOptions(Customer customer) {
         //displaying what's available to them
 
-        for(Map.Entry<String, Product> newMap: productList.entrySet()) {
+        for(Map.Entry<String, Product> newMap : productList.entrySet()) {
 
             Product product = newMap.getValue();
 
@@ -107,13 +107,20 @@ public class VendingMachine {
     public void purchase(String slot){
         Product product = productList.get(slot);
 
+        //how to get feed money to acknowledge purchase method
         // what if we are already sold out
         //what if user doesn't have enough money
 
         product.setQuantity(product.getQuantity() - 1);
-        money -= product.getPrice();
-
+        balance -= product.getPrice();
     }
+
+//    public static double findBalance(double){
+//        //moneyDbl - How to get this value to pass through this method?
+//
+//
+//        return 0;
+//    }
 
 
 }

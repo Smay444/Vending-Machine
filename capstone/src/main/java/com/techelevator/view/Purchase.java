@@ -14,6 +14,7 @@ public class Purchase {
     private static final String[] OPTIONS = {FEED_MONEY, SELECT_PRODUCT, FINISH_TRANSACTION};
     private double moneyIn = 0;
 
+
     private VendingMachine vendingMachine;
 
     public Purchase (VendingMachine vendingMachine){
@@ -43,10 +44,13 @@ public class Purchase {
                     String moneyInStr = scanner.nextLine();
                     Double moneyDbl = Double.parseDouble(moneyInStr);
 
-                    System.out.println("Current Money Provided: $ " + moneyInStr);
                     vendingMachine.setMoney(moneyDbl);
+                    //Double moneyInMachine = moneyDbl + moneyDbl;
+                    System.out.println("Current Money Provided: $ " + (moneyDbl));
 
-                    //why do we need to do this
+                   // vendingMachine.getMoney();
+                        //need to add logic that keeps tally of how much money we've entered.
+
                     System.out.println((String) menu.getChoiceFromOptions(OPTIONS));
 
                 } else if (choice.equals(SELECT_PRODUCT)) {
@@ -55,6 +59,15 @@ public class Purchase {
                     System.out.println("Please choose an option and input the slot ID");
                     String slotChoice = scanner.nextLine();
                     vendingMachine.purchase(slotChoice);
+
+                    if (product.containsValue(slotChoice)) { //if the slot selection does not exist in the map then
+                        System.out.println("Product not available. Please select a different option.");
+                    }
+
+                    //else if slot choice DOES exist
+                        //then do this
+
+
 
                     //if slotChoice equals getSlotKey, return item type
                     //if user input equals chip, sout "crunch, crunch, yum"
