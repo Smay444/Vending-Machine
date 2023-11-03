@@ -60,20 +60,9 @@ public class Purchase {
                     String slotChoice = scanner.nextLine();
                     vendingMachine.purchase(slotChoice);
 
-                    if (product.containsValue(slotChoice)) { //if the slot selection does not exist in the map then
-                        System.out.println("Product not available. Please select a different option.");
-                    }
 
                     //else if slot choice DOES exist
                         //then do this
-
-
-
-                    //if slotChoice equals getSlotKey, return item type
-                    //if user input equals chip, sout "crunch, crunch, yum"
-                    //if user input equals candy, sout "munch, munch, yum"
-                    //if user input equals drink, sout "glug, glug, yum"
-                    //if user input equals gum, sout "chew, chew, yum"
 
                     // try to access loadItems method to get type value
 

@@ -16,11 +16,11 @@ public class VendingMachine {
 
     private double balance = 0;
 
-    public double getMoney(){
+    public double getMoney() {
         return balance;
     }
 
-    public void setMoney(double money){
+    public void setMoney(double money) {
         this.balance = money;
     }
 
@@ -33,7 +33,7 @@ public class VendingMachine {
     //        printMap(treeMap);
     private Map<String, Product> productList = new TreeMap<String, Product>();
 
-    public Map<String, Product> getProductList(){
+    public Map<String, Product> getProductList() {
         return productList;
     }
 
@@ -71,17 +71,11 @@ public class VendingMachine {
     public void openVendingOptions(Customer customer) {
         //displaying what's available to them
 
-        for(Map.Entry<String, Product> newMap : productList.entrySet()) {
+        for (Map.Entry<String, Product> newMap : productList.entrySet()) {
 
             Product product = newMap.getValue();
 
-            //map.put("apple", 5);
-            //        map.put("banana", 3);
-            //        map.put("cherry", 8);map.put("apple", 5);
-            //        map.put("banana", 3);
-            //        map.put("cherry", 8);v
-
-            if(quantity < 1){
+            if (quantity < 1) {
                 System.out.println(product.getSlot() + " | " + product.getName() + " | " +
                         product.getPrice() + " | " + product.getType() + " | " + "Quantity remaining: SOLD OUT");
             } else {
@@ -91,28 +85,57 @@ public class VendingMachine {
 
         }
 
-            //ALLOW THE USER TO PUT MONEY IN
-            //STORE THAT MONEY
-            //PICK AN ITEM
-            //TOTAL THE COST
-            //GIVE CHANGE
-            //FINISH TRANSACTION
-            //STORE TRANSACTION INFO SOMEWHERE
+        //ALLOW THE USER TO PUT MONEY IN
+        //STORE THAT MONEY
+        //PICK AN ITEM
+        //TOTAL THE COST
+        //GIVE CHANGE
+        //FINISH TRANSACTION
+        //STORE TRANSACTION INFO SOMEWHERE
 
         //display options???
         //loop to start purchasing items
 
     }
 
-    public void purchase(String slot){
-        Product product = productList.get(slot);
+    public void purchase(String slot) {
 
-        //how to get feed money to acknowledge purchase method
-        // what if we are already sold out
-        //what if user doesn't have enough money
 
-        product.setQuantity(product.getQuantity() - 1);
-        balance -= product.getPrice();
+        if (!productList.containsKey(slot)) { //if the slot selection does not exist in the map then
+            System.out.println("Product not available. Please select a different option.");
+        } else {
+            Product product = productList.get(slot);
+            if (balance < product.getPrice()) {
+                System.out.println("Please put more money into the vending machine");
+
+                return;
+
+            } else if (product.getQuantity() < 1) {
+                System.out.println("Item is currently sold out");
+                return;
+
+            } else if (product.getType().equals("Chip")) {
+                System.out.println("Crunch Crunch, Yum!");
+            } else if (product.getType().equals("Candy")) {
+                System.out.println("Munch Munch, Yum!");
+            } else if (product.getType().equals("Drink")) {
+                System.out.println("Glug Glug, Yum!");
+            } else if (product.getType().equals("Gum")) {
+                System.out.println("Chew Chew, Yum!");
+            }
+
+            //what if user doesn't have enough money
+
+            product.setQuantity(product.getQuantity() - 1);
+
+            balance -= product.getPrice();
+
+
+        }
+//          how to get feed money to acknowledge purchase method
+
+
+        //print out remaining balance in vending machine
     }
 
 //    public static double findBalance(double){
