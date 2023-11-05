@@ -16,81 +16,53 @@ public class Purchase {
 
 
     private VendingMachine vendingMachine;
+    private Product product;
 
     public Purchase (VendingMachine vendingMachine){
         this.vendingMachine = vendingMachine;
     }
 
     public void openPurchaseOptions(Customer customer) {
-        //vendingMachine.loadItems();
         Scanner scanner = new Scanner(System.in);
 
-        //can we access our map from our vendingMachine class?
         try  {
             while (true) {
-                //create a variable that lets us display array options.
-                //System.out.println(OPTIONS);
-                //System.out.println("Current Money Provided: $ " + moneyIn);
+
                 Menu menu = new Menu(System.in, System.out);
                 String choice = (String) menu.getChoiceFromOptions(OPTIONS);
 
-
-
                 if (choice.equals(FEED_MONEY)) {
-
-                    //we can't feed money twice
-                    //feed money only works on initial input
 
                     System.out.println("How much money do you want to enter? ");
                     String moneyInStr = scanner.nextLine();
                     Double moneyDbl = Double.parseDouble(moneyInStr);
-
-                    vendingMachine.setMoney(moneyDbl + vendingMachine.getMoney());
-
-                    System.out.println("Current Money Provided: $ " + (vendingMachine.getMoney()));
-
-
-
-                    //System.out.println((String) menu.getChoiceFromOptions(OPTIONS));
+                    if(moneyDbl < 0) {
+                        System.out.println("You cannot remove money from the machine, " +
+                                "if you would like your change back, please select Finish Transaction");
+                        System.out.println("Please reenter a positive amount if you'd like to make a purchase");
+                    } else if(moneyDbl > 0){
+                        vendingMachine.setMoney(moneyDbl + vendingMachine.getMoney());
+                        System.out.println("Current Money Provided: $ " + (vendingMachine.getMoney()));
+                    }
 
                 } else if (choice.equals(SELECT_PRODUCT)) {
                     //will need logic to update quantity as items are removed
                     vendingMachine.openVendingOptions(customer);
                     System.out.println("Please choose an option and input the slot ID");
-                    String slotChoice = scanner.nextLine();
+                    String slotChoice = scanner.nextLine().toUpperCase();
                     vendingMachine.purchase(slotChoice);
 
-
-                    //else if slot choice DOES exist
-                        //then do this
-
-                    // try to access loadItems method to get type value
-
-                    //subtract quantity from inventory
-                    //if product doesn't exist
-                    //inform customer and return them to purchase menu
                     System.out.println("Current Money Provided: $ " + (vendingMachine.getMoney()));
-
-
 
                 } else if (choice.equals(FINISH_TRANSACTION)){
 
-                    vendingMachine.getChange();
-
+                    vendingMachine.getTheCoins();
+                    System.out.println("Thank you, come again!");
                     break;
                 }
-
-                //System.out.println(choice);
             }
-
         } catch (Exception ex) {
             System.out.println("Oops, something went wrong!");
         }
-    }
-    //this is for math logic
-    public void getChange(Double price){
-
-
-
     }
 }

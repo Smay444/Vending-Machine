@@ -46,7 +46,3 @@ public class VendingMachineCLI {
 		cli.run();
 	}
 }
-
-//if I want to purchase item at A2, how can I provide product at A2 = the slot
-//how could I get the entire product back if I know the slot number
-//            ;
